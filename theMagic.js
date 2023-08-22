@@ -17,11 +17,19 @@ const test = document.querySelector(`input[type=checkbox].hide`);
 
 var repositoryList = [];
 var hideList = [];
+var isVisible = false;
+
+window.onload = function() {
+    handleVisible();
+};
 
 function hadleClick(action) {
     if (repositoryList.length == 0) {
         getRepositoryList();
     }
+
+    action == VISIBILITY.HIDE ? hide() : unhide();
+    handleVisible();
 }
 
 function hide() {
@@ -32,7 +40,7 @@ function hide() {
             item.classList.remove(VISIBILITY.UNHIDE);
         }
         repository.classList.add(VISIBILITY.HIDE);
-    })
+    });
 }
 
 function unhide() {
@@ -66,4 +74,18 @@ function getRepositoryList() {
             console.error(error);
         }
     })
+}
+
+function handleVisible(){
+    const hide = document.getElementById('hide');
+    const unhide = document.getElementById('unhide');
+    isVisible = !isVisible; 
+
+    if(isVisible) {
+        hide.checked = false;
+        unhide.checked = true;
+    } else {
+        unhide.checked = false;
+        hide.checked = true;
+    }
 }
