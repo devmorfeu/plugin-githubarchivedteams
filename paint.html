@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Github hide and seek</title>
+    <style>
+        .hide {
+            display: none;
+        }
+        .unhide {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <section class="container">
+        <div class="menu">
+            <label for="hide">Ocultar</label>
+            <input type="checkbox" class="btn" id="hide" onclick="hadleClick(this.id)"></input>
+            <label for="hide">Exibir</label>
+            <input type="checkbox" class="btn" id="unhide" onclick="hadleClick(this.id)"></input>
+        </div>
+    </section>    
+    <script src="theMagic.js"></script>
+</body>
+</html>
