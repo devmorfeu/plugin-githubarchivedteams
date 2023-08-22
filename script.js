@@ -1,21 +1,69 @@
-let isOn = true;
-
-function toggleButton() {
-  const button = document.querySelector('.toggle-button');
-  isOn = !isOn;
-
-  if (isOn) {
-    button.classList.remove('off');
-    button.classList.add('on');
-    button.textContent = 'ON';
-  } else {
-    button.classList.remove('on');
-    button.classList.add('off');
-    button.textContent = 'OFF';
-  }
+const VISIBILITY = {
+    HIDE: 'hide',
+    UNHIDE: 'unhide'
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-  const button = document.querySelector('.toggle-button');
-  button.addEventListener('click', toggleButton);
-});
+const STATUS = {
+    PUBLIC: 'public',
+    PRIVATE: 'private',
+    ARCHIVED: 'archived'
+}
+
+const repository = {
+    id: '',
+    status: STATUS,
+}
+const test = document.querySelector(`input[type=checkbox].hide`);
+
+var repositoryList = [];
+var hideList = [];
+
+function hadleClick(action) {
+    if (repositoryList.length == 0) {
+        getRepositoryList();
+    }
+}
+
+function hide() {
+    hideList.forEach(repo => {
+        let item = document.querySelectorAll(`[data-bulk-actions-id=${repo.id}]`);
+        console.log(item);
+        if (item.classList.contains(VISIBILITY.UNHIDE)) {
+            item.classList.remove(VISIBILITY.UNHIDE);
+        }
+        repository.classList.add(VISIBILITY.HIDE);
+    })
+}
+
+function unhide() {
+    hideList.forEach(repo => {
+        let item = document.querySelectorAll(`[data-bulk-actions-id=${repo.id}]`);
+        if (item.classList.contains(VISIBILITY.HIDE)) {
+            item.classList.remove(VISIBILITY.HIDE);
+        }
+        item.classList.add(VISIBILITY.UNHIDE);
+    })
+}
+
+function getRepositoryList() {
+    const repoList = document.querySelectorAll('[data-bulk-actions-id]');
+    repoList.forEach(repo => {
+        try {
+            let tempRepo = repository;
+            tempRepo.status = () => {
+                if (repo.childNodes[1].childNodes[1].childNodes[3].childNodes[4].innerHTML) {
+                    return repo.childNodes[1].childNodes[1].childNodes[3].childNodes[4].innerHTML;
+                }
+            };
+            tempRepo.id = () => {
+                if (repo.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[1].childNodes[1].innerHTML) {
+                    return repo.childNodes[1].childNodes[1].childNodes[3].childNodes[1].childNodes[1].childNodes[1].innerHTML;
+                }
+            }
+            repositoryList.push(tempRepo);
+            tempRepo.status === STATUS.ARCHIVED ? hideList.push(tempRepo) : '';
+        } catch (error) {
+            console.error(error);
+        }
+    })
+}
