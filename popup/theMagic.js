@@ -50,6 +50,7 @@ function unhide() {
 
 function getRepositoryList() {
     const repoList = document.querySelectorAll('[data-bulk-actions-id]');
+
     repoList.forEach(repo => {
         try {
             let tempRepo = repository;
@@ -63,7 +64,7 @@ function getRepositoryList() {
             repositoryList.push(tempRepo);
             tempRepo.status == STATUS.ARCHIVED ? hideList.push(tempRepo) : '';
 
-            if(tempRepo.status == STATUS.ARCHIVED){
+            if (tempRepo.status == STATUS.ARCHIVED) {
                 const item = document.querySelector(`[data-bulk-actions-id=${tempRepo.id}]`);
                 item.setAttribute('style', 'display:none');
             }
@@ -77,10 +78,10 @@ function handleVisible() {
     const test = document.getElementById('checkbox');
     isVisible = !isVisible;
 
-    if(isVisible){
+    if (isVisible) {
         unhide.checked = true;
         hide.checked = false;
-    }else {
+    } else {
         hide.checked = true;
         unhide.checked = false;
     }
