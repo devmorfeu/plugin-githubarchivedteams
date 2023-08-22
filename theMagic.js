@@ -20,24 +20,17 @@ var hideList = [];
 var isVisible = false;
 
 window.onload = function () {
-    handleVisible();
     getRepositoryList();
 };
 
 function hadleClick(action) {
     action == VISIBILITY.HIDE ? hide() : unhide();
-
-    if (action == 'hide') {
-        hide()
-    }
-
-    handleVisible();
+    handleVisible(action);
 }
 
 function hide() {
     hideList.forEach(repo => {
         let item = document.querySelectorAll(`[data-bulk-actions-id=${repo.id}]`);
-        console.log(item);
         if (item.classList.contains(VISIBILITY.UNHIDE)) {
             item.classList.remove(VISIBILITY.UNHIDE);
         }
@@ -68,9 +61,12 @@ function getRepositoryList() {
             }
 
             repositoryList.push(tempRepo);
-            tempRepo.status === STATUS.ARCHIVED ? hideList.push(tempRepo) : '';
-            console.log('hide list: ', hideList);
-            console.log('repository list: ', repositoryList);
+            tempRepo.status == STATUS.ARCHIVED ? hideList.push(tempRepo) : '';
+
+            if(tempRepo.status == STATUS.ARCHIVED){
+                const item = document.querySelector(`[data-bulk-actions-id=${tempRepo.id}]`);
+                item.setAttribute('style', 'display:none');
+            }
         } catch (error) {
             console.error(error);
         }
@@ -78,15 +74,14 @@ function getRepositoryList() {
 }
 
 function handleVisible() {
-    const hide = document.getElementById('hide');
-    const unhide = document.getElementById('unhide');
+    const test = document.getElementById('checkbox');
     isVisible = !isVisible;
 
-    if (isVisible) {
-        hide.checked = false;
+    if(isVisible){
         unhide.checked = true;
-    } else {
-        unhide.checked = false;
+        hide.checked = false;
+    }else {
         hide.checked = true;
+        unhide.checked = false;
     }
 }

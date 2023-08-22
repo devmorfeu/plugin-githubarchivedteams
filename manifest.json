@@ -3,6 +3,9 @@
     "name": "Github Hide Archived",
     "description": "Hides archived projects from the times tab within the organization",
     "version": "1.0",
+    "action": {
+        "default_popup" : "popup.html"
+    },
     "content_scripts": [
       {
         "js": ["theMagic.js"],
