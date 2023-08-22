@@ -4,16 +4,8 @@
     "version": "1.0",
     "manifest_version": 3,
     "homepage_url": "https://github.com/devmorfeu/plugin-githubarchivedteams",
-    "permissions": ["storage", "activeTab"],
-    "run_at": "document_idle",
-    "content_scripts": [
-        {
-            "matches": [
-                "*://github.com/orgs/*/teams/*/repositories"
-            ],
-            "js": [
-                "script.js"
-            ]
-        }
-    ]
+    "permissions": ["scripting", "activeTab"],
+    "action": {
+        "default_popup": "popup.html"
+    }
 }
