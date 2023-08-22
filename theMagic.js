@@ -21,6 +21,7 @@ var isVisible = false;
 
 window.onload = function() {
     handleVisible();
+    getRepositoryList();
 };
 
 function hadleClick(action) {
