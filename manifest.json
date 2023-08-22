@@ -3,8 +3,17 @@
     "description": "Hides archived projects from the times tab within the organization",
     "version": "1.0",
     "manifest_version": 3,
-    "permissions": ["activeTab", "scripting"],
-    "action": {
-        "default_popup": "paint.html"
-    }
+    "homepage_url": "https://github.com/devmorfeu/plugin-githubarchivedteams",
+    "permissions": ["storage", "activeTab"],
+    "run_at": "document_idle",
+    "content_scripts": [
+        {
+            "matches": [
+                "*://github.com/orgs/*/teams/*/repositories"
+            ],
+            "js": [
+                "script.js"
+            ]
+        }
+    ]
 }
