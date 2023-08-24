@@ -4,7 +4,7 @@
     "description": "Hides archived projects from the times tab within the organization",
     "version": "1.0",
     "action": {
-        "default_popup" : "./popup/popup.html"
+      "default_title": "Click to show an alert"
     },
     "content_scripts": [
       {
@@ -15,5 +15,9 @@
         ]
       }
     ],
+    "background" : {
+      "service_worker" :"./user/userConfig.js"
+    },
+
     "permissions": ["storage", "scripting", "activeTab"]
   }

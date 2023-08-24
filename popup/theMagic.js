@@ -50,7 +50,7 @@ function unhide() {
 
 function getRepositoryList() {
     const repoList = document.querySelectorAll('[data-bulk-actions-id]');
-
+    console.log(chrome.storage.sync.get("value"));
     repoList.forEach(repo => {
         try {
             let tempRepo = repository;

@@ -1,34 +1,34 @@
 const hardDefaults = {
-  extEnabled: true,
+  HIDE_ENABLE: true, //deixar como default valor true no storage do chrome
+  GITHUB_TOKEN_KEY: 'x-github-token',
+  STORAGE: chrome.storage.local
 };
 
-export const getConfig = (config, domain = window.location.hostname, useDefault = true) =>
-  new Promise((resolve) => {
-    chrome.storage.sync.get(
-      {
-        // get custom domain config (if not getting default).
-        [`${domain !== 'default' ? domain : 'SKIP'}:${config}`]: null,
-        // also get user default as fallback
-        [`default:${config}`]: hardDefaults[config],
-      },
-      ({ [`${domain}:${config}`]: value, [`default:${config}`]: fallback }) =>
-        resolve(value ?? (useDefault ? fallback : null))
-    );
+const askGithubToken = (cb) => {
+  console.log("passou")
+  const githubToken = "aaaaaaaaaaaaaaaaaaaaaaaa"
+
+  if (githubToken === null) return
+
+  if (githubToken) {
+    saveGithubTokenPersonal(githubToken, cb)
+  } else {
+    console.log('You have entered an empty token.')
+
+    cb()
+  }
+}
+
+function saveGithubTokenPersonal (value, cb) {
+
+  const key = hardDefaults.GITHUB_TOKEN_KEY
+
+  hardDefaults.STORAGE.set({ "key": key, "value": value }).then(() => {
+    console.log("Value is set");
   });
 
-export const setConfig = (config, value, domain = window.location.hostname) =>
-  chrome.storage.sync.set({
-    [`${domain}:${config}`]: value,
+  hardDefaults.STORAGE.get(key).then((result) => {
+    console.log("Value currently is " + result[key]);
   });
-
-export const clearConfig = (config, domain = window.location.hostname) =>
-  new Promise((resolve) => {
-    chrome.storage.sync.remove(`${domain}:${config}`, resolve);
-  });
-
-export const onConfigChange = (config, handler, domain = window.location.hostname) =>
-  chrome.storage.onChanged.addListener(
-    (changes) =>
-      changes[`${domain}:${config}`]?.newValue !== undefined &&
-      handler(changes[`${domain}:${config}`]?.newValue)
-  );
+}
+chrome.action.onClicked.addListener((tab) => {askGithubToken(() => {})})
