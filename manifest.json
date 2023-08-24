@@ -1,22 +1,22 @@
 {
     "manifest_version": 3,
     "name": "Github Hide Archived",
-    "description": "Hides archived projects from the times tab within the organization",
+    "description": "Hides archived projects from the teams tab within the organization",
     "version": "1.0",
     "action": {
       "default_title": "Click to show an alert"
     },
     "content_scripts": [
       {
-        "js": ["./popup/theMagic.js"],
-        "css": ["./popup/style.css"],
+        "js": ["./src/popup/theMagic.js"],
+        "css": ["./src/popup/style.css"],
         "matches": [
           "*://github.com/orgs/*/teams/*/repositories"
         ]
       }
     ],
     "background" : {
-      "service_worker" :"./user/userConfig.js"
+      "service_worker" :"./src/user/userConfig.js"
     },
 
     "permissions": ["storage", "scripting", "activeTab"]
