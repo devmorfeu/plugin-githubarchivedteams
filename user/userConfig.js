@@ -1,34 +1,28 @@
-const hardDefaults = {
-  HIDE_ENABLE: true, //deixar como default valor true no storage do chrome
-  GITHUB_TOKEN_KEY: 'x-github-token',
-  STORAGE: chrome.storage.local
-};
+const githubToken = "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"
 
-const askGithubToken = (cb) => {
-  console.log("passou")
-  const githubToken = "aaaaaaaaaaaaaaaaaaaaaaaa"
-
+const askGithubToken = (githubToken) => {
+  
   if (githubToken === null) return
 
   if (githubToken) {
-    saveGithubTokenPersonal(githubToken, cb)
+    saveGithubTokenPersonal(githubToken)
   } else {
     console.log('You have entered an empty token.')
-
-    cb()
   }
 }
 
-function saveGithubTokenPersonal (value, cb) {
+async function saveGithubTokenPersonal (token) {
 
-  const key = hardDefaults.GITHUB_TOKEN_KEY
+  const GITHUB_TOKEN_KEY = "x-github-token";
 
-  hardDefaults.STORAGE.set({ "key": key, "value": value }).then(() => {
-    console.log("Value is set");
-  });
-
-  hardDefaults.STORAGE.get(key).then((result) => {
-    console.log("Value currently is " + result[key]);
+  await chrome.storage.sync.set({ GITHUB_TOKEN_KEY : token },function () {
+          console.log("Token salvo");
+      }
+  );
+  
+  chrome.storage.sync.get([GITHUB_TOKEN_KEY], function (storage) {
+      console.log("token: ", storage);
   });
 }
-chrome.action.onClicked.addListener((tab) => {askGithubToken(() => {})})
+
+chrome.action.onClicked.addListener(() => {askGithubToken(githubToken)})
