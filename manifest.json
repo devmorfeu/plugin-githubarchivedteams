@@ -16,7 +16,7 @@
       }
     ],
     "background" : {
-      "service_worker" :"./src/user/userConfig.js"
+      "service_worker" :"./src/configuration/user-configuration.js"
     },
 
     "permissions": ["storage", "scripting", "activeTab"]
