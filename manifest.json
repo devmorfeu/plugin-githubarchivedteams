@@ -8,16 +8,15 @@
     },
     "content_scripts": [
       {
-        "js": ["./src/popup/theMagic.js"],
-        "css": ["./src/popup/style.css"],
+        "js": ["./src/service/github-service.js"],
         "matches": [
-          "*://github.com/orgs/*/teams/*/repositories"
+          "*://github.com/orgs/*/teams/*"
         ]
       }
     ],
     "background" : {
-      "service_worker" :"./src/configuration/user-configuration.js"
+      "service_worker" :"./src/configuration/background.js"
     },
 
-    "permissions": ["storage", "scripting", "activeTab"]
+    "permissions": ["storage", "scripting", "activeTab", "declarativeContent"]
   }
