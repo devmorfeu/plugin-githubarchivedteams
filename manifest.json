@@ -25,6 +25,9 @@
       ],
       "js": [
         "github-service.js"
+      ],
+      "css": [
+        "style.css"
       ]
     }
   ],
