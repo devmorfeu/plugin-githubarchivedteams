@@ -41,8 +41,10 @@ async function getRepoList() {
     }
   }
 
-  await fetch(url, options)
-    .then(res => mapRepoList(res.json()));
+  const res = await fetch(url, options)
+    .then(res => res.json());
+
+  mapRepoList(res)
 
 }
 
