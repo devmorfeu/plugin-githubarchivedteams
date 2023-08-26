@@ -8,7 +8,7 @@ const matchTeam = currentUrl.match(regexTeam);
 const nameOrg = matchOrg[1]
 const nameTeam = matchTeam[1]
 
-window.onload = function() {
+window.onload = function () {
   getRepoList();
 };
 
@@ -26,17 +26,21 @@ async function getToken() {
 }
 
 async function getRepoList() {
-  let token = await getToken().then(token => {
-    return token.GITHUB_AUTHORIZATION;
-  });
-
-  let response = await fetch(`https://api.github.com/orgs/${nameOrg}/teams/${nameTeam}/repos`, {
+  const url = `https://api.github.com/orgs/${nameOrg}/teams/${nameTeam}/repos`;
+  const options = {
     method: "GET",
     headers: {
       "Authorization": `token ${token}`,
       "X-GitHub-Api-Version": "2022-11-28"
     }
-  }).then(res => console.log(res))
+  }
 
-  console.log(response)
+  const token = await getToken().then(token => {
+    return token.GITHUB_AUTHORIZATION;
+  });
+
+  const response = await fetch(url, options)
+    .then(res => console.log(res));
+
+  console.log(response);
 }
