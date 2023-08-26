@@ -151,10 +151,9 @@ function buildHtml() {
       </div>
 `
       ul.appendChild(li);
-      section.appendChild(ul);
-      itemscope.appendChild(section);
-
     }
+    section.appendChild(ul);
+    itemscope.appendChild(section);
   })
 
 }
