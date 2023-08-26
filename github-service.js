@@ -25,7 +25,13 @@ async function getToken() {
   })
 }
 
+
 async function getRepoList() {
+
+  const token = await getToken().then(token => {
+    return token.GITHUB_AUTHORIZATION;
+  });
+
   const url = `https://api.github.com/orgs/${nameOrg}/teams/${nameTeam}/repos`;
   const options = {
     method: "GET",
@@ -35,12 +41,8 @@ async function getRepoList() {
     }
   }
 
-  const token = await getToken().then(token => {
-    return token.GITHUB_AUTHORIZATION;
-  });
-
   const response = await fetch(url, options)
-    .then(res => console.log(res));
+    .then(res => res.text());
 
   console.log(response);
 }
