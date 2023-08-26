@@ -18,6 +18,16 @@
       "128": "/images/icon-128x128.png"
     }
   },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://github.com/orgs/*/teams/*"
+      ],
+      "js": [
+        "github-service.js"
+      ]
+    }
+  ],
   "permissions": [
     "storage",
     "activeTab",
