@@ -41,8 +41,32 @@ async function getRepoList() {
     }
   }
 
-  const response = await fetch(url, options)
-    .then(res => res.text());
+  await fetch(url, options)
+    .then(res => mapRepoList(res.json()));
 
+}
+
+function mapRepoList(response) {
   console.log(response);
+
+  const idSet = new Set();
+
+  response.forEach(repo => {
+    idSet.add(repo.id);
+  });
+
+  const finalJson = {
+    amount_repos: idSet.size,
+    repos: response.map(repo => {
+      return {
+        private: repo.private,
+        full_name: repo.full_name,
+        html_url: repo.html_url,
+        update_at: repo.updated_at,
+        archived: repo.archived
+      };
+    })
+  };
+
+  console.log(JSON.stringify(finalJson, null, 2));
 }
