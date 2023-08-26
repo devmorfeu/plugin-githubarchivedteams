@@ -54,7 +54,9 @@ function mapRepoList(response) {
   const idSet = new Set();
 
   response.forEach(repo => {
-    idSet.add(repo.id);
+    if (!repo.archived) {
+      idSet.add(repo.id);
+    }
   });
 
   const finalJson = {
