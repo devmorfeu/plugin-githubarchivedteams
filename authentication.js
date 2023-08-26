@@ -1,30 +1,7 @@
-const form = document.querySelector('form')
-const input = document.querySelector('.input')
-
-form.addEventListener('submit', async (event) => {
-  event.preventDefault();
-
-  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-
-  chrome.scripting.executeScript({
-    target: { tabId: tab.id },
-    func: askGithubToken,
-    args: [input.value]
-  })
-    .then((results) => console.log(results));
-
-})
-
-function askGithubToken(githubToken) {
-
-  if (githubToken === null) return
-
-  if (validateTokenGithub(githubToken) == true) {
-    saveGithubTokenPersonal(githubToken)
-  }
-
-  return true;
-}
+document.addEventListener('DOMContentLoaded', function() {
+  const token = document.getElementById("githubtoken");
+  document.getElementById("buttonToken").addEventListener("click",() => validateTokenGithub(token.value));
+});
 
 async function validateTokenGithub(token) {
 
@@ -37,7 +14,8 @@ async function validateTokenGithub(token) {
   });
 
   if (response.status == 200) {
-    console.log("token is valid!!")
+    console.log("token is valid!!");
+    saveGithubTokenPersonal(token);
     return true;
   } else {
     console.log("token is not valid!!")
