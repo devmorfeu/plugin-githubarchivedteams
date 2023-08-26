@@ -1,12 +1,29 @@
-const githubToken = "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"
+const form = document.querySelector('form')
+const input = document.querySelector('.input')
 
-async function askGithubToken(githubToken) {
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+
+  const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+
+  chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    func: askGithubToken,
+    args: [input.value]
+  })
+    .then((results) => console.log(results));
+
+})
+
+function askGithubToken(githubToken) {
 
   if (githubToken === null) return
 
-  if (await validateTokenGithub(githubToken) == true) {
+  if (validateTokenGithub(githubToken) == true) {
     saveGithubTokenPersonal(githubToken)
   }
+
+  return true;
 }
 
 async function validateTokenGithub(token) {
@@ -34,5 +51,3 @@ async function saveGithubTokenPersonal(token) {
     console.log("token saved in storage");
   });
 }
-
-chrome.action.onClicked.addListener(() => { askGithubToken(githubToken) })
