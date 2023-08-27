@@ -64,8 +64,9 @@ function mapRepoList(response) {
   const idSet = new Set();
 
   response.forEach(repo => {
-    console.log(repo)
-    idSet.add(repo.id);
+    if (!repo.archived) {
+      idSet.add(repo.id);
+    }
     finalJson.repos.push({
       private: repo.private,
       full_name: repo.full_name,
@@ -116,6 +117,7 @@ function buildHtml() {
     if (repo.archived === false) {
       const li = document.createElement("li");
       li.classList.add("table-list-item", "js-team-row", "js-bulk-actions-item");
+      const [orga, team] = repo.full_name.split('/');
       //class="table-list-item js-team-row js-bulk-actions-item"
       li.innerHTML = `
       <div class="table-list-cell">
@@ -125,7 +127,7 @@ function buildHtml() {
               <div>
                   <a class="f4" data-hovercard-type="repository" data-hovercard-url="${repo.html_url}/hovercard"
                       href="${repo.html_url}">
-                      <span>teste-orga/<strong>${repo.full_name}</strong></span>
+                      <span>${orga}/<strong>${team}</strong></span>
                   </a> <span></span><span class="Label Label--secondary v-align-middle"
                       title="Only visible to its members.">${repo.private === true ? "Private" : "Public"}</span>
                   <div class="description mt-1">
@@ -155,6 +157,25 @@ function buildHtml() {
     section.appendChild(ul);
     itemscope.appendChild(section);
   })
+
+  // Funcao de pesquisa
+  const searchInput = searchBar.querySelector('.js-team-search-field');
+  searchInput.addEventListener('input', function () {
+    const searchText = this.value.trim().toLowerCase();
+
+    finalJson.repos.forEach(repo => {
+      const li = ul.querySelector(`a[href="${repo.html_url}"]`);
+
+      if (!repo.archived && repo.full_name.toLowerCase().includes(searchText)) {
+        li.style.display = 'block';
+      } else {
+        if (li === null) {
+          return;
+        }
+        li.style.display = 'none';
+      }
+    });
+  });
 
 }
 
