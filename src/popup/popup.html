@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Extensão de Token</title>
   <link rel="stylesheet" href="popup.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
+
 <body>
 
   <div class="container">
@@ -19,8 +23,14 @@
     </div>
 
     <div class="successView" style="display: none;">
-      <i class="fas fa-check-circle"></i>
+      <i class="far fa-check-circle fa-lg" style="color: #ffffff;"></i>
       <p>Autenticado com sucesso!</p>
+
+      <div class="toggle-container">
+        <p>Ocultar projetos arquivados</p>
+        <i class="toggle-icon fa-solid fa-toggle-off" style="color:#ffffff; display: none;"></i>
+        <i class="toggle-icon fa-solid fa-toggle-on" style='color:#ffffff'></i>
+      </div>
     </div>
   </div>
 
