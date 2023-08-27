@@ -365,3 +365,33 @@ svg:not(:root) {
     overflow-clip-margin: content-box;
     overflow: hidden;
 }
+
+.tooltipped {
+    position: relative;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+svg:not(:root) {
+    overflow-clip-margin: content-box;
+}
+
+stop {
+    stop-color: var(--color-calendar-graph-day-L1-bg);
+}
+
+element.style {
+    stroke: none;
+    fill: url(#gradient-683547609);
+    mask: url(#sparkline-683547609);
+}
+
+rect {
+    shape-rendering: crispedges;
+}
+
+g {
+    transform: translate(0, -12);
+}
