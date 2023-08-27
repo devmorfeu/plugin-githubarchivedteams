@@ -16,6 +16,8 @@ async function validateTokenGithub(token) {
   if (response.status == 200) {
     console.log("token is valid!!");
     saveGithubTokenPersonal(token);
+    document.querySelector(".content").style.display = "none"
+    document.querySelector(".successView").style.display = "block"
     return true;
   } else {
     console.log("token is not valid!!")
