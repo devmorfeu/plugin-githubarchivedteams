@@ -19,7 +19,7 @@ function getList(repositories) {
     } else {
         list.push(repositories)
     }
-    return repositories;
+    return list;
 }
 
 function buildPaginationLayout() {
