@@ -1,0 +1,56 @@
+@media (min-width: 544px) {
+    .pagination>:nth-child(2), .pagination>:nth-last-child(2), .pagination>.current, .pagination>.gap {
+        display: inline-block;
+    }
+}
+
+@media (min-width: 768px) {
+    .d-md-inline-block {
+        display: inline-block !important;
+    }
+}
+
+a {
+    background-color: transparent;
+}
+
+.paginate-container {
+    margin-top: 16px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.paginate-container .pagination {
+    display: inline-block;
+}
+
+.pagination>:first-child, .pagination>:last-child, .pagination>.previous_page, .pagination>.next_page {
+    display: inline-block;
+}
+
+.pagination .previous_page, .pagination .next_page {
+    color: var(--fgColor-accent, var(--color-accent-fg));
+}
+
+.pagination a, .pagination span, .pagination em {
+    min-width: 32px;
+    padding: 5px 10px;
+    font-style: normal;
+    line-height: 20px;
+    color: var(--fgColor-default, var(--color-fg-default));
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    transition: border-color .2s cubic-bezier(0.3, 0, 0.5, 1);
+}
+
+.pagination .gap, .pagination .disabled, .pagination [aria-disabled=true], .pagination .gap:hover, .pagination .disabled:hover, .pagination [aria-disabled=true]:hover {
+    color: var(--fgColor-disabled, var(--color-primer-fg-disabled));
+    cursor: default;
+    border-color: transparent;
+}

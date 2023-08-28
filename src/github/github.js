@@ -80,15 +80,16 @@ function mapRepoList(response) {
 }
 
 function buildHtml() {
-  const itemscope = document.querySelector('div[itemscope]');
   const ul = document.createElement('ul');
   const head = document.createElement('span');
-  const section = document.createElement('section');
   const searchBar = document.createElement('div');
+  const section = document.createElement('section');
+  const itemscope = document.querySelector('div[itemscope]');
+  const searchInput = searchBar.querySelector('.js-team-search-field');
 
   section.classList.add('container', 'mt-4');
-  ul.classList.add('mylist', "team-listing", "table-list", "table-list-bordered", "adminable");
   searchBar.classList.add('auto-search-group');
+  ul.classList.add('mylist', "team-listing", "table-list", "table-list-bordered", "adminable");
 
   searchBar.innerHTML = `
     <div class="auto-search-group">
@@ -178,7 +179,6 @@ function buildHtml() {
   })
 
   // Funcao de pesquisa
-  const searchInput = searchBar.querySelector('.js-team-search-field');
   searchInput.addEventListener('input', function () {
     const searchText = this.value.trim().toLowerCase();
 
